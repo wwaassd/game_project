@@ -11,6 +11,8 @@
 #include <set>
 #include <map>
 #include "main_function.h"
+#include <thread>
+
 
 using std::map;
 using std::string;
@@ -45,7 +47,8 @@ public:
     set<User*>::iterator cbegin() {return pre_set.cbegin();}
     set<User*>::iterator cend() {return pre_set.cend();}
     set<User*>::iterator begin() {return pre_set.begin();}
-    set<User*>::iterator end() {return pre_set.end();}
+    set<User*>::iterator end() {
+        return pre_set.end();}
     set<User*>::iterator insert(User*);
     bool size_check(){
         return pre_set.size()<MAX_SIZE;
