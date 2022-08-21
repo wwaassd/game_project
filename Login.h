@@ -5,6 +5,7 @@
 #ifndef GAME_PROJECT_LOGIN_H
 #define GAME_PROJECT_LOGIN_H
 
+static const char *const loginFilePath = "login.txt";
 #include <string>
 #include <utility>
 #include <vector>

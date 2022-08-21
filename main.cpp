@@ -1,3 +1,5 @@
+#include <istream>
+#include <fstream>
 #include "main_function.h"
 
 int main(){

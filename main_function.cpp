@@ -86,14 +86,14 @@ void solve_flag_number(const char ch){
         }
         case '2':{
             auto manipulator=Create_account::try_to_create();
-            if(manipulator.first){
+            if (manipulator.first) {
                 //创建成功
                 //直接使用户登录成功
-                cout << "welcome my friend!"<<endl;
+                cout << "welcome my friend!" << endl;
                 system("pause");
 
                 delete manipulator.second;
-                manipulator.second=nullptr;
+                manipulator.second = nullptr;
                 exit(10024);
                 //需要获得一个 User类
                 /*
@@ -101,9 +101,9 @@ void solve_flag_number(const char ch){
                 登陆成功后的操作
 
                 */
-            }
-            else
+            } else {
                 throw failed_operation("failed to create an account");
+            }
         }
         default:
             throw std::invalid_argument("you should input a number!");
