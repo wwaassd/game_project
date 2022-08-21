@@ -34,10 +34,7 @@ inline bool User::check_user(std::string string_name,std::string string_number) 
 }
 
 Login::Login():login_flag(false),pre_user(new Pre_User){
-    std::ifstream is;
-    is.open(file_root["LOGIN"]+
-                         file_specific["pre_login"],
-            std::ifstream::binary);
+    std::ifstream is(loginFilePath);
     if(is) {
         string line;
         User user;
@@ -71,14 +68,11 @@ bool Login::find_user_message(std::ifstream& is,const User& user) const{
         const auto flag_user=user.check_user(name,number);
         if(flag_user){
             //将信息写到文件中
-            std::ifstream pre_is(file_root["LOGIN"]+
-                                     file_specific["pre_login"],
-                             std::ifstream::binary);
+            std::ifstream pre_is(loginFilePath);
             if(pre_is){
                 auto fflag= check_string_in_file(pre_is,name,number);
            if(fflag){
-               std::ofstream os(file_root["LOGIN"]+
-                                        file_specific["pre_login"],
+               std::ofstream os(loginFilePath,
                                 std::ofstream::binary|std::ofstream::app);
                if(os)
                    string_into_file(os,name,number);
@@ -105,8 +99,7 @@ std::pair<bool,const User*> Login::try_to_log() {
     }
         try {
             std::ifstream is;
-            is.open(file_root["LOGIN"]+
-                                 file_specific["login"],
+            is.open(loginFilePath,
                     std::ifstream::binary);
             if (is) {
                login_flag=find_user_message(is,*user);
@@ -124,8 +117,7 @@ std::pair<bool,const User*> Login::try_to_log() {
 void Login::finish() const {
     if(!flag)
         return ;
-    std::ofstream os(file_root["LOGIN"]+
-                                  file_specific["pre_login"],
+    std::ofstream os(loginFilePath,
                      std::ofstream::app | std::ofstream::binary);
     if(os){
         string line;
